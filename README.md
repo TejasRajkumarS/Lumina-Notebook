@@ -19,3 +19,4 @@ View your app in AI Studio: https://ai.studio/apps/6db355b2-3b64-4ae2-945b-1378c
 3. Run the app:
    `npm run dev`
 # Lumina-Notebook
+# Lumina-Notebook
