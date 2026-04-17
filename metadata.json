@@ -1,0 +1,6 @@
+{
+  "name": "Lumina Notebook",
+  "description": "An AI-powered research assistant and notebook inspired by NotebookLM, featuring context-grounded Q&A and a multi-speaker audio summary feature.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}
