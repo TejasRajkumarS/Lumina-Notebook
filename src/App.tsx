@@ -44,6 +44,7 @@ export default function App() {
   // Podcast state
   const [isGeneratingPodcast, setIsGeneratingPodcast] = useState(false);
   const [audioUrl, setAudioUrl] = useState<string | null>(null);
+  const [podcastTranscript, setPodcastTranscript] = useState<Array<{ speaker: string; text: string; timestamp: number }> | null>(null);
 
   useEffect(() => {
     if (user) {
@@ -215,7 +216,7 @@ export default function App() {
       const base64Audio = await generateTTS(script);
       if (base64Audio) {
         const audioBlob = createWavBlob(base64Audio);
-        
+
         // Upload to Supabase Storage
         const podcastId = uuidv4();
         const path = `${user?.id}/${activeNotebookId}/${podcastId}.wav`;
@@ -231,8 +232,23 @@ export default function App() {
           created_at: Date.now()
         });
 
+        // Convert script to transcript format with timestamps
+        let currentTime = 0;
+        const transcript = script.map((line: { speaker: string; text: string }) => {
+          const wordCount = line.text.split(' ').length;
+          const duration = (wordCount / 180) * 60; // Assuming 180 words per minute (faster pace)
+          const timestamp = currentTime;
+          currentTime += duration;
+          return {
+            speaker: line.speaker,
+            text: line.text,
+            timestamp
+          };
+        });
+
         if (audioUrl) URL.revokeObjectURL(audioUrl);
         setAudioUrl(publicUrl);
+        setPodcastTranscript(transcript);
       }
     } catch (error) {
       console.error("Error generating podcast:", error);
@@ -427,9 +443,13 @@ export default function App() {
       {/* Audio Player Overlay */}
       <AnimatePresence>
         {audioUrl && (
-          <AudioPlayer 
+          <AudioPlayer
             url={audioUrl}
-            onClose={() => setAudioUrl(null)}
+            onClose={() => {
+              setAudioUrl(null);
+              setPodcastTranscript(null);
+            }}
+            transcript={podcastTranscript || undefined}
           />
         )}
       </AnimatePresence>

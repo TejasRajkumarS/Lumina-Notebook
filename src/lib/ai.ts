@@ -85,14 +85,23 @@ export async function generatePodcastScript(sources: Source[]) {
     .join("\n\n");
 
   const prompt = `
-    Based on the following research documents, create a conversational "Podcast" script between two hosts: Host A (curious, asks deep questions) and Host B (expert, distills complex ideas).
-    
-    The conversation should be engaging, natural, and distill the key insights found in the documents.
-    
+    Based on the following research documents, create a conversational "Podcast" script between two hosts:
+
+    - Host A: A curious interviewer who asks insightful questions and guides the conversation. Keep their dialogue concise and focused on asking questions.
+    - Host B: An expert who provides detailed explanations and insights. Their responses should be comprehensive but well-structured.
+
+    IMPORTANT RULES:
+    1. Clearly alternate between Host A and Host B - never have the same speaker twice in a row
+    2. Host A should ask ONE clear question at a time
+    3. Host B should provide a complete answer before Host A asks the next question
+    4. Each dialogue turn should be a complete thought - no interruptions or back-and-forth within a single turn
+    5. Make the conversation natural and engaging, but maintain clear speaker boundaries
+    6. Aim for 8-12 exchanges total (Host A asks, Host B answers, repeat)
+
     Format the response as a valid JSON array of objects where each object has:
     - "speaker": "Host A" or "Host B"
-    - "text": The dialogue spoken by that person.
-    
+    - "text": The complete dialogue spoken by that person (one full question or one full answer)
+
     CONTEXT:
     ${context}
   `;
