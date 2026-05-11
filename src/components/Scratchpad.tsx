@@ -37,17 +37,17 @@ export const Scratchpad: React.FC<ScratchpadProps> = ({
   };
 
   return (
-    <div className="w-full md:w-[320px] lg:w-[380px] h-full border-l border-gray-100 bg-[#F9FAFB] flex flex-col p-4 md:p-6 space-y-6 md:space-y-8 overflow-y-auto overflow-x-hidden">
+    <div className="w-full md:w-[320px] lg:w-[380px] h-full border-l border-gray-100 dark:border-gray-800 bg-[#F9FAFB] dark:bg-[#1E293B] flex flex-col p-4 md:p-6 space-y-6 md:space-y-8 overflow-y-auto overflow-x-hidden">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-lg md:text-xl font-bold text-gray-900 mb-1">Notes</h2>
-          <p className="text-gray-400 text-xs font-medium uppercase tracking-tight">
+          <h2 className="text-lg md:text-xl font-bold text-gray-900 dark:text-gray-100 mb-1">Notes</h2>
+          <p className="text-gray-400 dark:text-gray-500 text-xs font-medium uppercase tracking-tight">
             {notes.length} {notes.length === 1 ? 'note' : 'notes'} saved
           </p>
         </div>
         <button
           onClick={() => setIsAdding(true)}
-          className="flex items-center gap-1.5 bg-white border border-gray-200 px-3 py-1.5 rounded-xl text-xs font-bold shadow-sm hover:border-gray-300 transition-all active:scale-95"
+          className="flex items-center gap-1.5 bg-white dark:bg-[#0F172A] border border-gray-200 dark:border-gray-700 px-3 py-1.5 rounded-xl text-xs font-bold shadow-sm hover:border-gray-300 dark:hover:border-gray-600 transition-all active:scale-95"
         >
           <Plus className="w-3.5 h-3.5" />
           Add
@@ -69,13 +69,13 @@ export const Scratchpad: React.FC<ScratchpadProps> = ({
                 onChange={(e) => setNewNote(e.target.value)}
                 onBlur={() => !newNote.trim() && setIsAdding(false)}
                 placeholder="Write a note..."
-                className="w-full p-4 rounded-2xl border border-primary/20 bg-white outline-none text-sm font-medium shadow-sm focus:border-primary transition-all resize-none"
+                className="w-full p-4 rounded-2xl border border-primary/20 bg-white dark:bg-[#0F172A] dark:text-gray-100 outline-none text-sm font-medium shadow-sm focus:border-primary transition-all resize-none"
                 rows={3}
               />
               <div className="flex justify-end gap-2 mt-2">
-                <button 
+                <button
                   onClick={() => setIsAdding(false)}
-                  className="px-3 py-1.5 text-xs font-bold text-gray-400 hover:text-gray-600"
+                  className="px-3 py-1.5 text-xs font-bold text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
                 >
                   Cancel
                 </button>
@@ -104,13 +104,13 @@ export const Scratchpad: React.FC<ScratchpadProps> = ({
                 layout
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
-                className="group bg-white border border-gray-100 rounded-2xl p-4 shadow-sm hover:border-gray-200 transition-all flex gap-3 relative"
+                className="group bg-white dark:bg-[#0F172A] border border-gray-100 dark:border-gray-800 rounded-2xl p-4 shadow-sm hover:border-gray-200 dark:hover:border-gray-700 transition-all flex gap-3 relative"
               >
-                <div className="mt-0.5 text-gray-200 group-hover:text-gray-300">
+                <div className="mt-0.5 text-gray-200 dark:text-gray-700 group-hover:text-gray-300 dark:group-hover:text-gray-600">
                   <GripVertical className="w-4 h-4" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm text-[#1F2937] leading-relaxed font-medium">
+                  <p className="text-sm text-[#1F2937] dark:text-gray-100 leading-relaxed font-medium">
                     {note.content}
                   </p>
                 </div>

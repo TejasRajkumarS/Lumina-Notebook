@@ -17,7 +17,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
   onDeleteNotebook
 }) => {
   return (
-    <div className="min-h-screen bg-white flex flex-col items-center">
+    <div className="min-h-screen bg-white dark:bg-[#0F172A] flex flex-col items-center">
       {/* Hero Section */}
       <section className="w-full max-w-4xl pt-12 md:pt-24 pb-12 md:pb-16 px-6 text-center space-y-6 md:space-y-8">
         <div className="inline-flex items-center gap-2 px-3 py-1 bg-orange-50 text-primary border border-orange-100 rounded-full text-[10px] md:text-[11px] font-bold uppercase tracking-wider">
@@ -34,7 +34,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
           />
         </div>
         
-        <p className="text-gray-500 max-w-xl mx-auto leading-relaxed text-sm md:text-base px-2">
+        <p className="text-gray-500 dark:text-gray-400 max-w-xl mx-auto leading-relaxed text-sm md:text-base px-2">
           Upload your documents, ask questions, and get source-grounded answers with citations. Your personal AI research companion.
         </p>
 
@@ -49,11 +49,11 @@ export const Dashboard: React.FC<DashboardProps> = ({
 
       {/* Notebooks List */}
       <section className="w-full max-w-6xl px-6 pb-24">
-        <h2 className="text-xl font-bold mb-8">Your Notebooks</h2>
+        <h2 className="text-xl font-bold mb-8 dark:text-gray-100">Your Notebooks</h2>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {notebooks.length === 0 ? (
-            <div className="col-span-full py-20 border-2 border-dashed border-gray-100 rounded-3xl flex flex-col items-center justify-center text-gray-400">
+            <div className="col-span-full py-20 border-2 border-dashed border-gray-100 dark:border-gray-800 rounded-3xl flex flex-col items-center justify-center text-gray-400">
               <Book className="w-10 h-10 mb-4 opacity-20" />
               <p>No notebooks yet. Create one to get started.</p>
             </div>
@@ -63,7 +63,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
                 key={notebook.id}
                 whileHover={{ y: -6, scale: 1.01 }}
                 onClick={() => onSelectNotebook(notebook.id)}
-                className="group bg-white border border-gray-100 rounded-[28px] p-8 shadow-[0_4px_20px_-10px_rgba(0,0,0,0.05)] hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] hover:border-orange-100 transition-all cursor-pointer relative overflow-hidden"
+                className="group bg-white dark:bg-[#1E293B] border border-gray-100 dark:border-gray-800 rounded-[28px] p-8 shadow-[0_4px_20px_-10px_rgba(0,0,0,0.05)] hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] hover:border-orange-100 dark:hover:border-orange-900 transition-all cursor-pointer relative overflow-hidden"
               >
                 <div className="absolute top-0 left-0 w-full h-1 bg-primary/10 group-hover:bg-primary transition-colors" />
                 
@@ -81,15 +81,15 @@ export const Dashboard: React.FC<DashboardProps> = ({
                   <Book className="w-5 h-5 text-primary" />
                 </div>
 
-                <h3 className="text-lg font-bold mb-2 group-hover:text-primary transition-colors truncate">{notebook.name}</h3>
-                <p className="text-gray-500 text-sm mb-6 line-clamp-2 leading-relaxed h-[40px]">
+                <h3 className="text-lg font-bold mb-2 group-hover:text-primary transition-colors truncate dark:text-gray-100">{notebook.name}</h3>
+                <p className="text-gray-500 dark:text-gray-400 text-sm mb-6 line-clamp-2 leading-relaxed h-[40px]">
                   {notebook.description || "No description provided."}
                 </p>
-                
-                <div className="flex items-center justify-between pt-4 border-t border-gray-50">
+
+                <div className="flex items-center justify-between pt-4 border-t border-gray-50 dark:border-gray-800">
                    <div className="flex flex-col gap-0.5">
                      <p className="text-[10px] uppercase font-bold text-gray-400 tracking-wider">Last Modified</p>
-                     <div className="flex items-center gap-1.5 text-gray-600 text-[11px] font-medium">
+                     <div className="flex items-center gap-1.5 text-gray-600 dark:text-gray-400 text-[11px] font-medium">
                        <Clock className="w-3 h-3 text-gray-400" />
                        {new Date(notebook.updated_at || notebook.created_at).toLocaleDateString(undefined, {
                          month: 'short',
@@ -98,7 +98,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
                        })}
                      </div>
                    </div>
-                  <div className="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-all shadow-sm">
+                  <div className="w-8 h-8 rounded-full bg-gray-50 dark:bg-gray-800 flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-all shadow-sm">
                     <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
                   </div>
                 </div>

@@ -40,11 +40,11 @@ export function Auth() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F9FAFB] flex items-center justify-center p-4">
-      <motion.div 
+    <div className="min-h-screen bg-[#F9FAFB] dark:bg-[#0F172A] flex items-center justify-center p-4">
+      <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="max-w-md w-full bg-white rounded-3xl shadow-2xl shadow-gray-200/50 p-8 md:p-10 border border-gray-100"
+        className="max-w-md w-full bg-white dark:bg-[#1E293B] rounded-3xl shadow-2xl shadow-gray-200/50 dark:shadow-black/50 p-8 md:p-10 border border-gray-100 dark:border-gray-800"
       >
         <div className="flex justify-center mb-8">
           <img 
@@ -55,39 +55,39 @@ export function Auth() {
           />
         </div>
 
-        <h2 className="text-3xl font-bold text-gray-900 text-center mb-2 tracking-tight">
+        <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100 text-center mb-2 tracking-tight">
           {isLogin ? 'Welcome back' : 'Create account'}
         </h2>
-        <p className="text-gray-500 text-center mb-8 font-medium">
+        <p className="text-gray-500 dark:text-gray-400 text-center mb-8 font-medium">
           {isLogin ? 'Start where you left off' : 'Join the research community'}
         </p>
 
         <form onSubmit={handleAuth} className="space-y-4">
           <div className="space-y-1">
-            <label className="text-xs font-bold uppercase tracking-wider text-gray-400 ml-1">Email Address</label>
+            <label className="text-xs font-bold uppercase tracking-wider text-gray-400 dark:text-gray-500 ml-1">Email Address</label>
             <div className="relative">
-              <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-300" />
+              <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-300 dark:text-gray-600" />
               <input
                 type="email"
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full bg-gray-50 border border-gray-100 rounded-2xl py-4 pl-12 pr-4 outline-none focus:ring-2 focus:ring-primary transition-all"
+                className="w-full bg-gray-50 dark:bg-[#0F172A] border border-gray-100 dark:border-gray-800 rounded-2xl py-4 pl-12 pr-4 outline-none focus:ring-2 focus:ring-primary transition-all dark:text-gray-100"
                 placeholder="you@example.com"
               />
             </div>
           </div>
 
           <div className="space-y-1">
-            <label className="text-xs font-bold uppercase tracking-wider text-gray-400 ml-1">Password</label>
+            <label className="text-xs font-bold uppercase tracking-wider text-gray-400 dark:text-gray-500 ml-1">Password</label>
             <div className="relative">
-              <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-300" />
+              <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-300 dark:text-gray-600" />
               <input
                 type="password"
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full bg-gray-50 border border-gray-100 rounded-2xl py-4 pl-12 pr-4 outline-none focus:ring-2 focus:ring-primary transition-all"
+                className="w-full bg-gray-50 dark:bg-[#0F172A] border border-gray-100 dark:border-gray-800 rounded-2xl py-4 pl-12 pr-4 outline-none focus:ring-2 focus:ring-primary transition-all dark:text-gray-100"
                 placeholder="••••••••"
               />
             </div>
@@ -121,10 +121,10 @@ export function Auth() {
           </button>
         </form>
 
-        <div className="mt-8 pt-8 border-t border-gray-50 text-center">
+        <div className="mt-8 pt-8 border-t border-gray-50 dark:border-gray-800 text-center">
           <button
             onClick={() => setIsLogin(!isLogin)}
-            className="text-gray-500 font-bold text-sm hover:text-primary transition-colors"
+            className="text-gray-500 dark:text-gray-400 font-bold text-sm hover:text-primary transition-colors"
           >
             {isLogin ? "Don't have an account? Sign up" : "Already have an account? Sign in"}
           </button>

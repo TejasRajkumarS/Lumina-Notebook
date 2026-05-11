@@ -53,18 +53,18 @@ export const Sidebar: React.FC<SidebarProps> = ({
   const readySourcesCount = sources.filter(s => s.summary && s.suggested_questions).length;
 
   return (
-    <div className="w-[280px] h-full border-r border-gray-100 bg-[#F9FAFB] flex flex-col p-6 space-y-8 overflow-y-auto relative shadow-2xl md:shadow-none">
+    <div className="w-[280px] h-full border-r border-gray-100 dark:border-gray-800 bg-[#F9FAFB] dark:bg-[#1E293B] flex flex-col p-6 space-y-8 overflow-y-auto relative shadow-2xl md:shadow-none">
       <div className="flex items-start justify-between">
         <div>
-          <h2 className="text-xl font-bold text-gray-900 mb-1">Sources</h2>
-          <p className="text-gray-400 text-xs font-medium uppercase tracking-tight">
+          <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-1">Sources</h2>
+          <p className="text-gray-400 dark:text-gray-500 text-xs font-medium uppercase tracking-tight">
             {readySourcesCount} of {sources.length} sources ready
           </p>
         </div>
         {onClose && (
-          <button 
+          <button
             onClick={onClose}
-            className="md:hidden p-2 -mt-1 -mr-2 text-gray-400 hover:text-gray-900 transition-colors"
+            className="md:hidden p-2 -mt-1 -mr-2 text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
@@ -74,18 +74,18 @@ export const Sidebar: React.FC<SidebarProps> = ({
       <div className="space-y-6">
         <button
           onClick={() => fileInputRef.current?.click()}
-          className="w-full aspect-[4/3] border-2 border-dashed border-gray-200 rounded-3xl flex flex-col items-center justify-center p-6 text-center group hover:border-primary hover:bg-orange-50 transition-all cursor-pointer bg-white"
+          className="w-full aspect-[4/3] border-2 border-dashed border-gray-200 dark:border-gray-700 rounded-3xl flex flex-col items-center justify-center p-6 text-center group hover:border-primary hover:bg-orange-50 dark:hover:bg-orange-950 transition-all cursor-pointer bg-white dark:bg-[#0F172A]"
           disabled={isLoading}
         >
           {isLoading ? (
             <Loader2 className="w-8 h-8 animate-spin text-gray-300" />
           ) : (
             <>
-              <div className="w-12 h-12 bg-gray-50 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+              <div className="w-12 h-12 bg-gray-50 dark:bg-gray-800 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                 <Upload className="w-6 h-6 text-gray-400 group-hover:text-primary transition-colors" />
               </div>
-              <p className="text-sm font-bold text-[#1F2937]">Upload sources</p>
-              <p className="text-[10px] text-gray-400 mt-1 uppercase font-bold tracking-tight">
+              <p className="text-sm font-bold text-[#1F2937] dark:text-gray-100">Upload sources</p>
+              <p className="text-[10px] text-gray-400 dark:text-gray-500 mt-1 uppercase font-bold tracking-tight">
                 PDF, TXT, Markdown
               </p>
             </>
@@ -103,7 +103,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
           {sources.map((source) => (
             <div
               key={source.id}
-              className="group flex flex-col gap-1 p-4 bg-white border border-gray-100 rounded-2xl shadow-sm hover:border-gray-200 transition-all relative"
+              className="group flex flex-col gap-1 p-4 bg-white dark:bg-[#0F172A] border border-gray-100 dark:border-gray-800 rounded-2xl shadow-sm hover:border-gray-200 dark:hover:border-gray-700 transition-all relative"
             >
               <div className="absolute top-2 right-2 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-all">
                 <button
@@ -121,11 +121,11 @@ export const Sidebar: React.FC<SidebarProps> = ({
               </div>
 
               <div className="flex items-center gap-2 mb-1">
-                <div className="w-8 h-8 rounded-lg bg-orange-50 flex items-center justify-center">
+                <div className="w-8 h-8 rounded-lg bg-orange-50 dark:bg-orange-950 flex items-center justify-center">
                   <FileText className="w-4 h-4 text-primary" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-[13px] font-bold text-[#1F2937] truncate">{source.name}</p>
+                  <p className="text-[13px] font-bold text-[#1F2937] dark:text-gray-100 truncate">{source.name}</p>
                 </div>
               </div>
               
@@ -141,7 +141,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                     ANALYZING
                   </div>
                 )}
-                <span className="text-[10px] font-bold text-gray-400 bg-gray-50 px-1.5 py-0.5 rounded-full uppercase">
+                <span className="text-[10px] font-bold text-gray-400 dark:text-gray-500 bg-gray-50 dark:bg-gray-800 px-1.5 py-0.5 rounded-full uppercase">
                   {source.type}
                 </span>
               </div>

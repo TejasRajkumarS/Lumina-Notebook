@@ -15,14 +15,16 @@ import { getAllSources, saveSource, deleteSource,
 import { generateChatResponse, generateSourceInsights, generatePodcastScript, generateTTS } from './lib/ai';
 import { createWavBlob } from './lib/audio';
 import { v4 as uuidv4 } from 'uuid';
-import { Sparkles, X, Play, Pause, Headphones, ArrowLeft, Edit3, Mic2, Loader2, Check, Menu, MessageSquare, StickyNote, LogOut } from 'lucide-react';
+import { Sparkles, X, Play, Pause, Headphones, ArrowLeft, Edit3, Mic2, Loader2, Check, Menu, MessageSquare, StickyNote, LogOut, Moon, Sun } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { cn } from './lib/utils';
 import { useAuth } from './contexts/AuthContext';
+import { useTheme } from './contexts/ThemeContext';
 import { Auth } from './screens/Auth';
 
 export default function App() {
   const { user, loading: authLoading, signOut } = useAuth();
+  const { isDark, toggleTheme } = useTheme();
   const [notebooks, setNotebooks] = useState<Notebook[]>([]);
   const [activeNotebookId, setActiveNotebookId] = useState<string | null>(null);
   const [sources, setSources] = useState<Source[]>([]);
@@ -259,7 +261,7 @@ export default function App() {
 
   if (authLoading) {
     return (
-      <div className="min-h-screen bg-[#F3F4F6] flex items-center justify-center">
+      <div className="min-h-screen bg-[#F3F4F6] dark:bg-[#0F172A] flex items-center justify-center">
         <Loader2 className="w-8 h-8 animate-spin text-gray-400" />
       </div>
     );
@@ -281,13 +283,13 @@ export default function App() {
   }
 
   return (
-    <div className="flex flex-col h-screen bg-[#F3F4F6] font-sans text-[#1F2937] overflow-hidden">
+    <div className="flex flex-col h-screen bg-[#F3F4F6] dark:bg-[#0F172A] font-sans text-[#1F2937] dark:text-gray-100 overflow-hidden">
       {/* Header */}
-      <header className="h-[64px] bg-white border-b border-gray-100 flex items-center justify-between px-4 md:px-6 flex-shrink-0 z-30">
+      <header className="h-[64px] bg-white dark:bg-[#1E293B] border-b border-gray-100 dark:border-gray-800 flex items-center justify-between px-4 md:px-6 flex-shrink-0 z-30">
         <div className="flex items-center gap-2 md:gap-6">
-          <button 
+          <button
             onClick={() => setActiveNotebookId(null)}
-            className="p-2 -ml-2 text-gray-400 hover:text-gray-900 transition-colors"
+            className="p-2 -ml-2 text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors"
           >
             <ArrowLeft className="w-5 h-5" />
           </button>
@@ -301,7 +303,7 @@ export default function App() {
           
           <button
             onClick={() => setIsSidebarOpen(true)}
-            className="md:hidden p-2 text-gray-400 hover:text-gray-900 transition-colors"
+            className="md:hidden p-2 text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors"
           >
             <Menu className="w-5 h-5" />
           </button>
@@ -315,7 +317,7 @@ export default function App() {
                    value={tempNotebookName}
                    onChange={(e) => setTempNotebookName(e.target.value)}
                    onKeyDown={(e) => e.key === 'Enter' && handleUpdateNotebookName()}
-                   className="text-base md:text-xl font-bold tracking-tight border-b-2 border-primary outline-none max-w-[120px] md:max-w-none"
+                   className="text-base md:text-xl font-bold tracking-tight border-b-2 border-primary outline-none max-w-[120px] md:max-w-none bg-transparent"
                  />
                  <button 
                    onClick={handleUpdateNotebookName}
@@ -329,9 +331,9 @@ export default function App() {
                  <h1 className="text-base md:text-xl font-bold tracking-tight truncate max-w-[150px] md:max-w-none">
                    {activeNotebook?.name}
                  </h1>
-                 <button 
+                 <button
                    onClick={() => setIsEditingNotebookName(true)}
-                   className="p-1.5 text-gray-300 hover:text-gray-900 transition-colors"
+                   className="p-1.5 text-gray-300 hover:text-gray-900 dark:hover:text-gray-100 transition-colors"
                  >
                    <Edit3 className="w-4 h-4" />
                  </button>
@@ -341,6 +343,14 @@ export default function App() {
         </div>
         
         <div className="flex items-center gap-2 md:gap-4">
+          <button
+            onClick={toggleTheme}
+            className="p-2 text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors"
+            title={isDark ? "Switch to light mode" : "Switch to dark mode"}
+          >
+            {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+          </button>
+
           <button
             onClick={signOut}
             className="p-2 text-gray-400 hover:text-red-500 transition-colors hidden sm:flex items-center gap-2 text-xs font-bold uppercase tracking-wider"
@@ -352,7 +362,7 @@ export default function App() {
           <button
             onClick={handleGeneratePodcast}
             disabled={sources.length === 0 || isGeneratingPodcast}
-            className="flex items-center gap-2 px-3 md:px-4 py-2 border border-gray-200 rounded-xl text-xs md:text-sm font-bold shadow-sm hover:border-gray-900 transition-all disabled:opacity-50 disabled:cursor-not-allowed group"
+            className="flex items-center gap-2 px-3 md:px-4 py-2 border border-gray-200 dark:border-gray-700 rounded-xl text-xs md:text-sm font-bold shadow-sm hover:border-gray-900 dark:hover:border-gray-500 transition-all disabled:opacity-50 disabled:cursor-not-allowed group"
           >
             {isGeneratingPodcast ? (
               <Loader2 className="w-4 h-4 animate-spin" />
@@ -386,9 +396,9 @@ export default function App() {
           />
         </div>
 
-        <main className="flex-1 flex flex-col min-w-0 bg-white shadow-inner relative">
+        <main className="flex-1 flex flex-col min-w-0 bg-white dark:bg-[#1E293B] shadow-inner relative">
           {/* Tabs for Mobile */}
-          <div className="md:hidden flex bg-white border-b border-gray-100 flex-shrink-0">
+          <div className="md:hidden flex bg-white dark:bg-[#1E293B] border-b border-gray-100 dark:border-gray-800 flex-shrink-0">
             <button
               onClick={() => setActiveTab('chat')}
               className={cn(

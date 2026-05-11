@@ -54,11 +54,11 @@ const MessageContent: React.FC<{ content: string; isUser: boolean }> = ({ conten
               }
             }
             return inline ? (
-              <code className="bg-gray-100 px-1 rounded text-orange-600 font-bold" {...props}>
+              <code className="bg-gray-100 dark:bg-gray-800 px-1 rounded text-orange-600 dark:text-orange-400 font-bold" {...props}>
                 {children}
               </code>
             ) : (
-              <pre className="bg-gray-50 p-4 rounded-xl text-xs overflow-auto" {...props}>
+              <pre className="bg-gray-50 dark:bg-gray-900 p-4 rounded-xl text-xs overflow-auto" {...props}>
                 <code>{children}</code>
               </pre>
             );
@@ -119,19 +119,19 @@ export const Chat: React.FC<ChatProps> = ({
   };
 
   return (
-    <div className="flex-1 flex flex-col h-full bg-[#F3F4F6] relative overflow-hidden">
+    <div className="flex-1 flex flex-col h-full bg-[#F3F4F6] dark:bg-[#0F172A] relative overflow-hidden">
       <div ref={scrollRef} className="flex-1 overflow-y-auto px-4 md:px-8 pt-6 pb-24 space-y-6 md:space-y-8">
         {/* Notebook Guide */}
         {activeGuide && (
-          <div className="bg-orange-50/50 border border-orange-100 rounded-[24px] md:rounded-3xl p-4 md:p-6 relative group mb-6 md:mb-8">
+          <div className="bg-orange-50/50 dark:bg-orange-950/30 border border-orange-100 dark:border-orange-900 rounded-[24px] md:rounded-3xl p-4 md:p-6 relative group mb-6 md:mb-8">
             <div className="flex items-center justify-between mb-3 md:mb-4">
               <div className="flex items-center gap-2 text-primary">
                 <BookOpen className="w-5 h-5" />
                 <h3 className="text-xs md:text-sm font-bold uppercase tracking-wider">Notebook Guide</h3>
               </div>
-              <button 
+              <button
                 onClick={() => setShowGuide(!showGuide)}
-                className="text-gray-400 hover:text-gray-600 transition-colors"
+                className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
               >
                 <ChevronUp className={cn("w-5 h-5 transition-transform", !showGuide && "rotate-180")} />
               </button>
@@ -145,7 +145,7 @@ export const Chat: React.FC<ChatProps> = ({
                   exit={{ height: 0, opacity: 0 }}
                   className="overflow-hidden"
                 >
-                  <p className="text-[#1F2937] text-sm md:text-[15px] leading-relaxed font-medium">
+                  <p className="text-[#1F2937] dark:text-gray-200 text-sm md:text-[15px] leading-relaxed font-medium">
                     {activeGuide.summary}
                   </p>
                   
@@ -155,7 +155,7 @@ export const Chat: React.FC<ChatProps> = ({
                          <button
                            key={i}
                            onClick={() => onSendMessage(q)}
-                           className="text-[10px] md:text-xs bg-white border border-orange-100 text-primary px-3 py-1.5 rounded-full font-bold hover:bg-orange-100 transition-colors"
+                           className="text-[10px] md:text-xs bg-white dark:bg-[#1E293B] border border-orange-100 dark:border-orange-900 text-primary px-3 py-1.5 rounded-full font-bold hover:bg-orange-100 dark:hover:bg-orange-950 transition-colors"
                          >
                            {q}
                          </button>
@@ -168,7 +168,7 @@ export const Chat: React.FC<ChatProps> = ({
           </div>
         )}
 
-        <div className="flex items-center gap-2 mb-4 text-[#1F2937] opacity-60">
+        <div className="flex items-center gap-2 mb-4 text-[#1F2937] dark:text-gray-100 opacity-60">
            <GripVertical className="w-4 h-4" />
            <h4 className="text-base md:text-lg font-bold">Chat</h4>
            <span className="hidden sm:inline text-[10px] uppercase font-bold tracking-widest ml-2">Source-grounded answers with inline citations</span>
@@ -191,18 +191,18 @@ export const Chat: React.FC<ChatProps> = ({
             >
               <div className={cn(
                 "px-4 md:px-6 py-4 md:py-5 rounded-[24px] md:rounded-[28px] text-sm md:text-[15.5px] leading-relaxed relative group shadow-sm transition-all",
-                message.role === 'user' 
-                  ? "bg-primary text-white font-bold rounded-tr-none shadow-orange-100 ring-4 ring-primary/5" 
-                  : "bg-white text-[#1F2937] font-medium rounded-tl-none border border-gray-100 hover:shadow-md"
+                message.role === 'user'
+                  ? "bg-primary text-white font-bold rounded-tr-none shadow-orange-100 ring-4 ring-primary/5"
+                  : "bg-white dark:bg-[#1E293B] text-[#1F2937] dark:text-gray-100 font-medium rounded-tl-none border border-gray-100 dark:border-gray-800 hover:shadow-md"
               )}>
                 {message.role === 'assistant' && (
                   <>
-                    <div className="hidden sm:flex absolute -left-10 top-2 w-8 h-8 rounded-lg bg-orange-50 items-center justify-center text-primary group-hover:scale-110 transition-transform">
+                    <div className="hidden sm:flex absolute -left-10 top-2 w-8 h-8 rounded-lg bg-orange-50 dark:bg-orange-950 items-center justify-center text-primary group-hover:scale-110 transition-transform">
                       <Sparkles className="w-4 h-4" />
                     </div>
                     <button
                       onClick={() => handleCopy(message.id, message.content)}
-                      className="absolute -right-2 sm:-right-10 -top-10 sm:top-2 p-2 text-gray-400 hover:text-gray-600 opacity-0 group-hover:opacity-100 transition-all bg-white sm:bg-transparent rounded-full border border-gray-100 sm:border-none shadow-sm sm:shadow-none"
+                      className="absolute -right-2 sm:-right-10 -top-10 sm:top-2 p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 opacity-0 group-hover:opacity-100 transition-all bg-white dark:bg-[#1E293B] sm:bg-transparent dark:sm:bg-transparent rounded-full border border-gray-100 dark:border-gray-800 sm:border-none shadow-sm sm:shadow-none"
                       title="Copy to clipboard"
                     >
                       {copiedId === message.id ? <Check className="w-4 h-4 text-emerald-500" /> : <Copy className="w-4 h-4" />}
@@ -216,10 +216,10 @@ export const Chat: React.FC<ChatProps> = ({
           ))
         )}
         {isLoading && (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="flex items-center gap-3 mr-auto bg-white px-5 py-3 md:px-6 md:py-4 rounded-[24px] md:rounded-[28px] shadow-sm border border-gray-100"
+            className="flex items-center gap-3 mr-auto bg-white dark:bg-[#1E293B] px-5 py-3 md:px-6 md:py-4 rounded-[24px] md:rounded-[28px] shadow-sm border border-gray-100 dark:border-gray-800"
           >
             <div className="flex gap-1.5">
               <div className="w-1.5 h-1.5 bg-primary rounded-full animate-bounce [animation-delay:-0.3s]"></div>
@@ -238,7 +238,7 @@ export const Chat: React.FC<ChatProps> = ({
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Ask about your sources..."
-            className="w-full py-3.5 md:py-4 pl-5 md:pl-6 pr-14 md:pr-16 rounded-full border border-gray-100 bg-white outline-none text-sm md:text-[15px] font-medium shadow-lg focus:border-primary transition-all"
+            className="w-full py-3.5 md:py-4 pl-5 md:pl-6 pr-14 md:pr-16 rounded-full border border-gray-100 dark:border-gray-800 bg-white dark:bg-[#1E293B] dark:text-gray-100 outline-none text-sm md:text-[15px] font-medium shadow-lg focus:border-primary transition-all"
           />
           <button
             type="submit"
